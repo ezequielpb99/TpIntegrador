@@ -66,56 +66,26 @@ public class DomainTest {
 
     @Before
     public void Init(){
-        //Listas
-        List<Usuario> usuarios = new ArrayList<>();
-        List<Usuario> usuarios2 = new ArrayList<>();
-        usuarios.add(Visualizador1);
-        usuarios.add(Visualizador2);
-        usuarios.add(Configurador1);
-        usuarios.add(Admin1);
-        usuarios2.add(Visualizador3);
-        usuarios2.add(Configurador2);
-        usuarios2.add(Configurador3);
-        usuarios2.add(Admin2);
-        usuarios2.add(Admin3);
-        List<Regla> reglas = new ArrayList<>();
-        List<Regla> reglas2 = new ArrayList<>();
-        reglas.add(regla1);
-        reglas.add(regla2);
-        reglas2.add(regla3);
-        reglas2.add(regla4);
-        List<Actuador> actuadores = new ArrayList<>();
-        List<Actuador> actuadores2 = new ArrayList<>();
-        actuadores.add(actuador1);
-        actuadores2.add(actuador2);
-        List<Gym> gimnasiosInd1 = new ArrayList<>();
-        List<Gym> gimnasiosInd2 = new ArrayList<>();
-        List<Gym> gimnasios = new ArrayList<>();
-        gimnasios.add(Lugano);
-        gimnasios.add(Belgrano);
-        gimnasiosInd1.add(Lugano);
-        gimnasiosInd2.add(Belgrano);
 
-        //Gyms
-        this.Lugano = new Gym(usuarios, reglas, actuadores, "Lugano", 12345);
-        this.Belgrano = new Gym(usuarios2, reglas2, actuadores2, "Belgrano", 123456);
+       this.Lugano = new Gym("Lugano", 12345);
+        this.Belgrano = new Gym("Belgrano", 123456);
 
         //Usuarios
-        this.Visualizador1 = new Usuario(123, 1, "usr1", "psw1", visualizador,gimnasiosInd1);
-        this.Visualizador2 = new Usuario(124, 1, "usr2", "psw2", visualizador, gimnasiosInd1);
-        this.Configurador1 = new Usuario(125, 2, "usr3", "psw3", configurador,gimnasiosInd1);
-        this.Admin1 = new Usuario(126, 3, "usr4", "psw4", admin, gimnasiosInd1);
+        this.Visualizador1 = new Usuario(123, 1, "usr1", "psw1", visualizador);
+        this.Visualizador2 = new Usuario(124, 1, "usr2", "psw2", visualizador);
+        this.Configurador1 = new Usuario(125, 2, "usr3", "psw3", configurador);
+        this.Admin1 = new Usuario(126, 3, "usr4", "psw4", admin);
 
-        this.Visualizador3 = new Usuario(1234, 1, "usr5", "psw5", visualizador,gimnasiosInd2);
-        this.Configurador2 = new Usuario(1235, 2, "usr6", "psw6", visualizador, gimnasiosInd2);
-        this.Configurador3 = new Usuario(1236, 2, "usr7", "psw7", configurador,gimnasiosInd2);
-        this.Admin2 = new Usuario(1237, 3, "usr8", "psw8", admin, gimnasiosInd2);
-        this.Admin3 = new Usuario(1238, 3, "usr9", "psw9", admin, gimnasiosInd2);
+        this.Visualizador3 = new Usuario(1234, 1, "usr5", "psw5", visualizador);
+        this.Configurador2 = new Usuario(1235, 2, "usr6", "psw6", visualizador);
+        this.Configurador3 = new Usuario(1236, 2, "usr7", "psw7", configurador);
+        this.Admin2 = new Usuario(1237, 3, "usr8", "psw8", admin);
+        this.Admin3 = new Usuario(1238, 3, "usr9", "psw9", admin);
 
-        this.SuperAdmin = new Usuario(12345, 4, "supUsr", "supPsw", superAdmin, gimnasios);
+        this.SuperAdmin = new Usuario(12345, 4, "supUsr", "supPsw", superAdmin);
 
 
-        this.Visualizador4 = new Usuario(124123123, 5, "usr2", "psw2", visualizador, gimnasiosInd1);
+        this.Visualizador4 = new Usuario(124123123, 5, "usr2", "psw2", visualizador);
 
         //Reglas
         this.regla1 = new Regla(123,"Si la temp llega a los 20° abrir agua caliente", accion1, 20, alerta1 );
@@ -136,13 +106,44 @@ public class DomainTest {
         this.alerta1 = new Alerta(126, "Suministro de agua fria finalizado", Configurador2);
 
         //Sensores
-        this.sensor1 = new Sensor(124, Lugano, "°C", 20, reglas);
-        this.sensor2 = new Sensor(125, Belgrano, "°C", 38, reglas2);
+        this.sensor1 = new Sensor(124, Lugano, "°C", 20);
+        this.sensor2 = new Sensor(125, Belgrano, "°C", 38);
+
+        //Actuadores
+        this.actuador1 = new Actuador(1245, false);
+        this.actuador2 = new Actuador(1246, false);
      }
 
      @Test
     public void Permisos(){
-        this.Visualizador1.VerSensores();
+
+        sensor1.addRegla(regla1);
+        sensor1.addRegla(regla2);
+        sensor2.addRegla(regla3);
+        sensor2.addRegla(regla4);
+
+        Lugano.addActuador(actuador1);
+        Lugano.addRegla(regla1);
+        Lugano.addRegla(regla2);
+        Lugano.addSensor(sensor1);
+        Belgrano.addActuador(actuador2);
+        Belgrano.addRegla(regla3);
+        Belgrano.addRegla(regla4);
+        Belgrano.addSensor(sensor2);
+
+        Visualizador1.addGym(Lugano);
+        Visualizador2.addGym(Lugano);
+        Visualizador3.addGym(Belgrano);
+        Configurador1.addGym(Lugano);
+        Configurador2.addGym(Belgrano);
+        Configurador3.addGym(Belgrano);
+        Admin1.addGym(Lugano);
+        Admin2.addGym(Belgrano);
+        Admin3.addGym(Belgrano);
+        SuperAdmin.addGym(Lugano);
+        SuperAdmin.addGym(Belgrano);
+
+        //this.Visualizador1.VerSensores();
         this.Visualizador2.VerSensores();
         this.Visualizador3.VerSensores();
         this.Visualizador1.ABMConfiguraciones();
@@ -184,6 +185,34 @@ public class DomainTest {
 
      @Test
     public void CheckSensores(){
+
+         sensor1.addRegla(regla1);
+         sensor1.addRegla(regla2);
+         sensor2.addRegla(regla3);
+         sensor2.addRegla(regla4);
+
+         Lugano.addActuador(actuador1);
+         Lugano.addRegla(regla1);
+         Lugano.addRegla(regla2);
+         Lugano.addSensor(sensor1);
+         Belgrano.addActuador(actuador2);
+         Belgrano.addRegla(regla3);
+         Belgrano.addRegla(regla4);
+         Belgrano.addSensor(sensor2);
+
+         Visualizador1.addGym(Lugano);
+         Visualizador2.addGym(Lugano);
+         Visualizador3.addGym(Belgrano);
+         Configurador1.addGym(Lugano);
+         Configurador2.addGym(Belgrano);
+         Configurador3.addGym(Belgrano);
+         Admin1.addGym(Lugano);
+         Admin2.addGym(Belgrano);
+         Admin3.addGym(Belgrano);
+         SuperAdmin.addGym(Lugano);
+         SuperAdmin.addGym(Belgrano);
+
+
         sensor1.CheckReglas();
         sensor1.setValorDeMedicion(38);
         sensor1.CheckReglas();

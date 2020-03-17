@@ -5,16 +5,16 @@ import java.util.List;
 import java.util.Random;
 
 public class Gym {
-    public List<Usuario> usuarios;
     public List<Regla> reglas;
     public List<Actuador> actuadores;
+    public List<Sensor> sensores;
     public String localidad;
     public Integer id;
 
-    public Gym(List<Usuario> usuarios, List<Regla> reglas, List<Actuador> actuadores, String localidad, Integer id) {
-        this.usuarios = usuarios;
-        this.reglas = reglas;
-        this.actuadores = actuadores;
+    public Gym(String localidad, Integer id) {
+        this.reglas = new ArrayList<>();
+        this.actuadores = new ArrayList<>();
+        this.sensores = new ArrayList<>();
         this.localidad = localidad;
         this.id = id;
     }
@@ -31,12 +31,6 @@ public class Gym {
     public void setId(Integer id) {
         id = id;
     }
-    public List<Usuario> getUsuarios() {
-        return usuarios;
-    }
-    public void setUsuarios(List<Usuario> usuarios) {
-        this.usuarios = usuarios;
-    }
     public List<Regla> getReglas() {
         return reglas;
     }
@@ -46,9 +40,33 @@ public class Gym {
     public List<Actuador> getActuadores() {
         return actuadores;
     }
-    public void setActuadores(List<Actuador> sensores) {
-        this.actuadores = sensores;
+    public void setActuadores(List<Actuador> actuadores) {
+        this.actuadores = actuadores;
+    }
+    public List<Sensor> getSensores() {
+        return sensores;
+    }
+    public void setSensores(List<Sensor> sensores) {
+        this.sensores = sensores;
     }
 
 
+    public void addRegla(Regla unaRegla){
+        reglas.add(unaRegla);
+    }
+    public void removeRegla(Regla unaRegla){
+        reglas.remove(unaRegla);
+    }
+    public void addActuador(Actuador unActuador){
+        actuadores.add(unActuador);
+    }
+    public void removeActuador(Actuador unActuador){
+        actuadores.remove(unActuador);
+    }
+    public void addSensor(Sensor unSensor){
+        sensores.add(unSensor);
+    }
+    public void removeSensor(Sensor unSensor){
+        sensores.remove(unSensor);
+    }
 }

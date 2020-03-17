@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -11,12 +12,12 @@ public class Sensor {
     public List<Regla> reglas;
 
 
-    public Sensor(Integer id, Gym ubicacion, String prefijo, int valorDeMedicion, List<Regla> reglas) {
+    public Sensor(Integer id, Gym ubicacion, String prefijo, int valorDeMedicion) {
         this.id = id;
         this.ubicacion = ubicacion;
         this.prefijo = prefijo;
         this.valorDeMedicion = valorDeMedicion;
-        this.reglas = reglas;
+        this.reglas = new ArrayList<>();
     }
 
     public Integer getId() {
@@ -64,7 +65,12 @@ public class Sensor {
             regla.seCumpleCon(valorDeMedicion);
         }
     }
-    
+    public void addRegla(Regla unaRegla){
+        reglas.add(unaRegla);
+    }
+    public void aremoveRegla(Regla unaRegla){
+        reglas.remove(unaRegla);
+    }
 
 
 }

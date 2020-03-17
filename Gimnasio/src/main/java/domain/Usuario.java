@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Usuario {
@@ -11,13 +12,13 @@ public class Usuario {
     public List<Gym> gimnasios;
 
 
-    public Usuario(Integer id, Integer idPermiso, String nombre, String contraseña, TipoDeUsuario tipoDeUsuario, List<Gym> gimnasios) {
+    public Usuario(Integer id, Integer idPermiso, String nombre, String contraseña, TipoDeUsuario tipoDeUsuario) {
         this.id = id;
         this.idPermiso = idPermiso;
         this.nombre = nombre;
         this.contraseña = contraseña;
         this.tipoDeUsuario = tipoDeUsuario;
-        this.gimnasios = gimnasios;
+        this.gimnasios = new ArrayList<>();
     }
 
     public List<Gym> getGimnasios() {
@@ -69,5 +70,11 @@ public class Usuario {
     }
     public void ABMGimnasios(){
         tipoDeUsuario.VerificarPermiso(idPermiso);
+    }
+    public void addGym(Gym unGym){
+        gimnasios.add(unGym);
+    }
+    public void removeGym(Gym unGym){
+        gimnasios.remove(unGym);
     }
 }
