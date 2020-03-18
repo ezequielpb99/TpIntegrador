@@ -60,16 +60,16 @@ public class Usuario {
 
 
     public void VerSensores(){
-        tipoDeUsuario.VerificarPermiso(idPermiso);
+        tipoDeUsuario.PermisoVerSensores(idPermiso);
     }
     public void ABMConfiguraciones(){
-        tipoDeUsuario.VerificarPermiso(idPermiso);
+        tipoDeUsuario.PermisoABMConfiguraciones(idPermiso);
     }
     public void ABMUsuarios(){
-        tipoDeUsuario.VerificarPermiso(idPermiso);
+        tipoDeUsuario.PermisoABMUsuarios(idPermiso);
     }
     public void ABMGimnasios(){
-        tipoDeUsuario.VerificarPermiso(idPermiso);
+        tipoDeUsuario.PermisoABMGimnasios(idPermiso);
     }
     public void addGym(Gym unGym){
         gimnasios.add(unGym);

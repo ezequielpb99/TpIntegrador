@@ -67,8 +67,14 @@ public class DomainTest {
     @Before
     public void Init(){
 
-       this.Lugano = new Gym("Lugano", 12345);
+        this.Lugano = new Gym("Lugano", 12345);
         this.Belgrano = new Gym("Belgrano", 123456);
+
+        //Tipos de Usuario
+        this.visualizador = new Visualizador();
+        this.configurador = new Configurador();
+        this.admin = new Admin();
+        this.superAdmin = new SuperAdmin();
 
         //Usuarios
         this.Visualizador1 = new Usuario(123, 1, "usr1", "psw1", visualizador);
@@ -87,11 +93,13 @@ public class DomainTest {
 
         this.Visualizador4 = new Usuario(124123123, 5, "usr2", "psw2", visualizador);
 
-        //Reglas
-        this.regla1 = new Regla(123,"Si la temp llega a los 20° abrir agua caliente", accion1, 20, alerta1 );
-        this.regla2 = new Regla(124,"Si la temp llega a los 38° cerrar agua caliente", accion2, 38, alerta2 );
-        this.regla3 = new Regla(125,"Si la temp llega a los 38° abrir agua fria", accion3, 38, alerta3 );
-        this.regla4 = new Regla(126,"Si la temp llega a los 20° cerrar agua fria", accion4, 20, alerta4 );
+        //Sensores
+        this.sensor1 = new Sensor(124, Lugano, "°C", 20);
+        this.sensor2 = new Sensor(125, Belgrano, "°C", 38);
+
+        //Actuadores
+        this.actuador1 = new Actuador(1245, false);
+        this.actuador2 = new Actuador(1246, false);
 
         //Acciones
         this.accion1 = new Accion(123, "Apertura de valvula para calentar el agua", actuador1);
@@ -101,18 +109,17 @@ public class DomainTest {
 
         //Alertas
         this.alerta1 = new Alerta(123, "Temperatura del agua baja, suministro de agua caliente en proceso", Configurador1);
-        this.alerta1 = new Alerta(124, "Suministro de agua caliente finalizado", Configurador1);
-        this.alerta1 = new Alerta(125, "Temperatura del agua alta, suministro de agua fria en proceso", Configurador2);
-        this.alerta1 = new Alerta(126, "Suministro de agua fria finalizado", Configurador2);
+        this.alerta2 = new Alerta(124, "Suministro de agua caliente finalizado", Configurador1);
+        this.alerta3 = new Alerta(125, "Temperatura del agua alta, suministro de agua fria en proceso", Configurador2);
+        this.alerta4 = new Alerta(126, "Suministro de agua fria finalizado", Configurador2);
 
-        //Sensores
-        this.sensor1 = new Sensor(124, Lugano, "°C", 20);
-        this.sensor2 = new Sensor(125, Belgrano, "°C", 38);
+        //Reglas
+        this.regla1 = new Regla(123,"Si la temp llega a los 20° abrir agua caliente", accion1, 20, alerta1 );
+        this.regla2 = new Regla(124,"Si la temp llega a los 38° cerrar agua caliente", accion2, 38, alerta2 );
+        this.regla3 = new Regla(125,"Si la temp llega a los 38° abrir agua fria", accion3, 38, alerta3 );
+        this.regla4 = new Regla(126,"Si la temp llega a los 20° cerrar agua fria", accion4, 20, alerta4 );
 
-        //Actuadores
-        this.actuador1 = new Actuador(1245, false);
-        this.actuador2 = new Actuador(1246, false);
-     }
+    }
 
      @Test
     public void Permisos(){
@@ -185,6 +192,7 @@ public class DomainTest {
 
      @Test
     public void CheckSensores(){
+
 
          sensor1.addRegla(regla1);
          sensor1.addRegla(regla2);
