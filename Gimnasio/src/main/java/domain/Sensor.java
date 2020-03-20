@@ -62,7 +62,7 @@ public class Sensor {
 
     public void CheckReglas(){
         for (Regla regla: reglas) {
-            regla.seCumpleCon(valorDeMedicion);
+            regla.CheckReglas(valorDeMedicion);
         }
     }
     public void addRegla(Regla unaRegla){

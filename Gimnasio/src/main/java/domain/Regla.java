@@ -45,8 +45,14 @@ public class Regla {
 
 
 
-    public void seCumpleCon(int unValor){
+    public boolean seCumpleCon(int unValor){
         if (unValor == valorLimite){
+            return true;
+        }
+        else return false;
+    }
+    public void CheckReglas(int unValor){
+        if (seCumpleCon(unValor)){
             ejecutaAccion();
         }
     }
